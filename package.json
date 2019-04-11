@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/JoseCrz/taspp/issues"
   },
-  "homepage": "https://github.com/JoseCrz/taspp#readme"
+  "homepage": "https://github.com/JoseCrz/taspp#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "mongodb": "^3.2.3",
+    "mongoose": "^5.5.0"
+  }
 }
