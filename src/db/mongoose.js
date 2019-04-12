@@ -7,16 +7,31 @@ mongoose.connect('mongodb://127.0.0.1:27017/taspp-api', {
 
 const User = mongoose.model('User', {
     name: {
-        type: String
+        type: String,
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+        lowercase: true
     },
     age: {
-        type: Number
+        type: Number,
+        default: 0,
+        validate (value) {
+            if (value < 0) {
+                throw new Error ('Age must be positive!')
+            }
+        }
     }
 })
 
 const me = new User({
-    name: 'José',
-    age: 23
+    name: 'Joseph   ',
+    email: 'Joseph@joestar.com',
+    age: 0
 })
 
 me.save().then(result => {
@@ -34,13 +49,13 @@ const Task = mongoose.model('Task', {
     }
 })
 
-const task = new Task({
-    description: 'Study hard',
-    completed: false
-})
+// const task = new Task({
+//     description: 'Study hard',
+//     completed: false
+// })
 
-task.save().then(result => {
-    console.log(result)
-}).catch(error => {
-    console.log(error)
-})
+// task.save().then(result => {
+//     console.log(result)
+// }).catch(error => {
+//     console.log(error)
+// })
