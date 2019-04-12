@@ -24,3 +24,23 @@ me.save().then(result => {
 }).catch(error => {
     console.log(error)
 })
+
+const Task = mongoose.model('Task', {
+    description: {
+        type: String
+    },
+    completed: {
+        type: Boolean
+    }
+})
+
+const task = new Task({
+    description: 'Study hard',
+    completed: false
+})
+
+task.save().then(result => {
+    console.log(result)
+}).catch(error => {
+    console.log(error)
+})
