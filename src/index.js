@@ -5,6 +5,7 @@ const chalk = require('chalk')
 //Local Modules
 require('./db/mongoose')
 const User = require('./models/userModel')
+const Task = require('./models/taskModel')
 
 
 const app = express()
@@ -18,8 +19,17 @@ app.post('/users', (request, response) => {
     const user = new User(request.body)
 
     user.save().then(result => {
-        console.log(result)
-        response.send(result)
+        response.status(201).send(result)
+    }).catch(error => {
+        response.status(400).send(error)
+    })
+})
+
+app.post('/tasks', (request, response) => {
+    const task = new Task(request.body)
+
+    task.save().then(result => {
+        response.status(201).send(result)
     }).catch(error => {
         response.status(400).send(error)
     })
