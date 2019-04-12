@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const validator = require('validator')
 
 mongoose.connect('mongodb://127.0.0.1:27017/taspp-api', {
     useNewUrlParser: true,
@@ -15,7 +16,12 @@ const User = mongoose.model('User', {
         type: String,
         required: true,
         trim: true,
-        lowercase: true
+        lowercase: true,
+        validate (value) {
+            if (!validator.isEmail(value)) {
+                throw new Error('Email format is invalid!')
+            }
+        }
     },
     age: {
         type: Number,
