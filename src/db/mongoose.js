@@ -29,7 +29,7 @@ const User = mongoose.model('User', {
         minlength: 7,
         trim: true,
         validate (value) {
-            if (value.includes('password')) {
+            if (value.toLowerCase().includes('password')) {
                 throw new Error('Password must not include "password" string')
             }
         } 
@@ -60,20 +60,22 @@ me.save().then(result => {
 
 const Task = mongoose.model('Task', {
     description: {
-        type: String
+        type: String,
+        required: true,
+        trim: true
     },
     completed: {
-        type: Boolean
+        type: Boolean,
+        default: false
     }
 })
 
-// const task = new Task({
-//     description: 'Study hard',
-//     completed: false
-// })
+const task = new Task({
+    description: '   defeat DIO    ',
+})
 
-// task.save().then(result => {
-//     console.log(result)
-// }).catch(error => {
-//     console.log(error)
-// })
+task.save().then(result => {
+    console.log(result)
+}).catch(error => {
+    console.log(error)
+})
