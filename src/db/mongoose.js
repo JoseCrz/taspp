@@ -23,21 +23,33 @@ const User = mongoose.model('User', {
             }
         }
     },
+    password: {
+        type: String,
+        required: true,
+        minlength: 7,
+        trim: true,
+        validate (value) {
+            if (value.includes('password')) {
+                throw new Error('Password must not include "password" string')
+            }
+        } 
+    },
     age: {
         type: Number,
         default: 0,
         validate (value) {
             if (value < 0) {
-                throw new Error ('Age must be positive!')
+                throw new Error('Age must be positive!')
             }
         }
     }
 })
 
 const me = new User({
-    name: 'Joseph   ',
-    email: 'Joseph@joestar.com',
-    age: 0
+    name: 'Jotaro',
+    email: 'jotaro@kujo.com',
+    age: 23,
+    password: 'mimibebe'
 })
 
 me.save().then(result => {
